@@ -1,5 +1,10 @@
 # REST-API-user-profile-module
-This API is used to update user password and change user profile
+This works for :
+1. Registration user
+2. Update user profile
+3. Update user password
+4. Show all user 
+
 # USER MODULE
 
 REST API SERVER for user module
