@@ -29,7 +29,7 @@ const userDAO = {
 				else resolve(result)
 			})
 		})
-	}
+	},
 
 	updateProfile:(id,toUpdateObj)=>{
 		
