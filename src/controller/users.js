@@ -51,6 +51,16 @@ const userController = {
 		.catch((err)=>{
 			res.json(err)
 		})		
+	},
+
+	getUsers : (req,res)=>{
+		userDAO.findAll()
+		.then((result)=>{
+			res.json(result)
+		})
+		.catch((err)=>{
+			console.log(err)
+		})
 	}
 
 }

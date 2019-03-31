@@ -45,6 +45,16 @@ const userDAO = {
 				else resolve(result)
 			})
 		})
+	},
+
+	findAll:()=>{
+		const queryStr = "SELECT * from tb_user"
+		return new Promise((resolve,reject)=>{
+			connection.query(queryStr,(err,result)=>{
+				if(result===undefined)reject(new Error("Undefined Result"));
+				else resolve(result)
+			})
+		})
 	}
 }
 

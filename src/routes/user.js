@@ -36,4 +36,7 @@ userRouter.patch('/:id',
 
 	userController.updateUserProfile)
 
+//get all user 
+userRouter.get('/all',userController.getUsers)
+
 module.exports = userRouter
