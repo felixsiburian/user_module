@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>User Profile Module API Guideline</title>
+        <link rel='stylesheet prefetch' href='https://unpkg.com/bulma@0.7.4/css/bulma.min.css'>
+
+        <style>
+        	.tabs {
+			margin-bottom: -1px !important;
+			position: relative;
+			}
+			.tab-content {
+			padding: 60px;
+			top: 197px;
+			color: #000;
+			background-color: white;
+			}
+			.tab-pane {
+			display: none;
+			}
+			.tab-pane.is-active {
+			display: block;
+			width: 50%;
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+			}
+			.is-active {
+			display: initial;
+			}
+
+			.cent{
+			display: block;
+			margin: 10px auto;
+			padding: 5px;
+			border: 1px solid #ccc}
+
+			
+
+			/* CSS from http://embedresponsively.com */
+			.embed-container {
+				position: relative;
+				padding-bottom: 56.25%;
+				height: 0;
+				overflow: hidden;
+				max-width: 100%;
+			}
+			.embed-container iframe,
+			.embed-container object,
+			.embed-container embed {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+        </style>
+    </head>
+    <body>
+        
+        <section class="hero is-info">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                    User Module
+                    </h1>
+                    <h2 class="subtitle">
+                    API Documentation for user Module
+                    </h2>
+                </div>
+            </div>
+            <div class="tabs is-boxed is-centered main-menu" id="nav">
+                <ul>
+                    <li data-target="pane-1" id="1" class="is-active">
+                        <a>
+                            
+                            <span>User Registration</span>
+                        </a>
+                    </li>
+                    <li data-target="pane-2" id="2">
+                        <a>
+                            <span>User Password update</span>
+                        </a>
+                    </li>
+                    <li data-target="pane-3" id="3">
+                        <a>
+                            <span>User Profile Update</span>
+                        </a>
+                    </li>
+                    <li data-target="pane-4" id="4">
+                        <a>
+                            <span>All Users</span>
+                        </a>
+                    </li>
+                    <li data-target="pane-5" id="5">
+                    	<a>
+                    		<span>Cara Penggunaan</span>
+                    	</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane is-active" id="pane-1">
+                   <div class="content">
+                        <h1>User Registration</h1>
+                        <p>Registrating a new user to database</p>
+                        
+                        <h3>API End Point</h3>
+                        <a href="http://localhost:3000/api/user/">http://localhost:3000/api/user/</a>
+                        
+                        <h3>Request Type</h3>
+                        <p>POST Request</p>
+
+                        <h3>Request Body</h3>
+                        <p>
+                        	<blockquote>email (type=email, unique,required),
+                        			<br>name (type=string,minlength=6),
+                        			<br>password (type=string,minlength=6,required),
+                        			<br>phone (type=numeric)
+                        	</blockquote>
+                        </p>
+                    
+                   
+                    <h3>Example</h3>
+                    <p>This API was tested using Postman</p>                    
+<!---Successful Registration-->
+                    <h4 style="color:green">Registration Success</h4>
+                    <h6>HTTP Request (body type=json)</h6>
+                        <pre>
+POST /api/user/
+Content-Type: application/json
+cache-control: no-cache
+Postman-Token: 48e22adf-be29-4360-9467-ac5f3b992643
+User-Agent: PostmanRuntime/7.6.1
+Accept: */*
+Host: localhost:3000
+accept-encoding: gzip, deflate
+content-length: 124
+{
+ "email":"testingemail@gmail.com",
+ "name":"testingusername",
+ "password":"testingpassword1asdf",
+ "phone":"0821237381"
+ }
+                        </pre>
+
+
+                        <h6>HTTP Response (<span style="color:green">success</span>)</h6>
+                        <pre>
+HTTP/1.1 200
+status: 200
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Origin, X-Requested-With,Content-Type,Accept
+Content-Type: application/json; charset=utf-8
+Content-Length: 128
+ETag: W/"80-4SrEztK71i8uL/+fvsXi4YFGAq4"
+Date: Fri, 29 Mar 2019 03:33:15 GMT
+Connection: keep-alive
+{"fieldCount":0,"affectedRows":1,"insertId":75,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
+                        </pre>
+<!---Fail Registration-->
+                        <h4 style="color:red">Registration Fail (duplicate email)</h4>
+                        <p>This failure will raise if user trying to register an already registered email.<br>
+                        Server response code is 200 , because failures come from database.</p>
+
+                        <h6>HTTP Request (body type=json)</h6>
+                        <pre>
+POST /api/user/
+Content-Type: application/json
+cache-control: no-cache
+Postman-Token: 48e22adf-be29-4360-9467-ac5f3b992643
+User-Agent: PostmanRuntime/7.6.1
+Accept: */*
+Host: localhost:3000
+accept-encoding: gzip, deflate
+content-length: 124
+{
+ "email":"testingemail@gmail.com",
+ "name":"testingusername",
+ "password":"testingpassword1asdf",
+ "phone":"0821237381"
+ }
+                        </pre>
+
+
+                        <h6>HTTP Response (<span style="color:red">fail</span>)</h6>
+                        
+                        <pre>
+HTTP/1.1 200
+status: 200
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Origin, X-Requested-With,Content-Type,Accept
+Content-Type: application/json; charset=utf-8
+Content-Length: 283
+ETag: W/"11b-h5RiwFX+fZc6/SQOy4kf4MEqnYo"
+Date: Fri, 29 Mar 2019 03:40:45 GMT
+Connection: keep-alive
+{"code":"ER_DUP_ENTRY","errno":1062,"sqlMessage":"Duplicate entry 'testingemail@gmail.com' for key 'uk_email'","sqlState":"23000","index":0,"sql":"INSERT INTO tb_user(email,name,password,phone) VALUES ('testingemail@gmail.com','testingusername','testingpassword1asdf','0821237381')"}                       
+						</pre>
+
+						<h4 style="color:red">Registration Fail (invalid request body)</h4>
+                        <p>This failure will raise if user trying to register with wrong input.
+                        	<br> E.g : "email":"somestring","phone":"anotherstring",<br> where email should be type of email and phone should be type of numeric
+
+                        <h6>HTTP Request (body type=json)</h6>
+                        <pre>
+POST /api/user/
+Content-Type: application/json
+cache-control: no-cache
+Postman-Token: fe0fc396-cd60-47ed-ad5e-8554a4fda183
+User-Agent: PostmanRuntime/7.6.1
+Accept: */*
+Host: localhost:3000
+accept-encoding: gzip, deflate
+content-length: 131
+{
+ "email":"testinginvalidemail.com",
+ "name":"testingusername",
+ "password":"testingpassword1asdf",
+ "phone":"number0821237381"
+ }
+                        </pre>
+
+						<h6>HTTP Response (<span style="color:red">fail</span>)</h6>
+                        <p>Server return error 422(Unprocessable Entity). Value of submitted email and phone in request body is invalid
+                        <pre>
+HTTP/1.1 422
+status: 422
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Origin, X-Requested-With,Content-Type,Accept
+Content-Type: application/json; charset=utf-8
+Content-Length: 189
+ETag: W/"bd-ZCDfNGOYWrqFVDhXBLcCVb5IpqU"
+Date: Fri, 29 Mar 2019 04:03:45 GMT
+Connection: keep-alive
+{"errors":[{"location":"body","param":"email","value":"testinginvalidemail.com","msg":"Invalid value"},{"location":"body","param":"phone","value":"number0821237381","msg":"Invalid value"}]}                     
+						</pre>
+                              
+            </div>
+                </div>
+
+                <div class="tab-pane" id="pane-2">
+                	 <div class="content">
+                        <h1>User Update Password</h1>
+                        <p>Updating a new password for user to database</p>
+                        
+                        <h3>API End Point</h3>
+                        <a href="http://localhost:3000/api/user/password/">http://localhost:3000/api/user/password/:id</a>
+                        
+                        <h3>Request Type</h3>
+                        <p>PATCH Request</p>
+
+                        <h3>Request Body</h3>
+                        <p>
+                        	<blockquote>
+                        			password (type=string,minlength=6,required),
+                        	</blockquote>
+                        </p>
+                    
+                   
+                    <h3>Example</h3>
+                    <p>This API was tested using Postman</p>                    
+<!---Successful Registration-->
+                    <h4 style="color:green">Registration Success</h4>
+                    <h6>HTTP Request (body type=json)</h6>
+                        <pre>
+PATCH /api/user/password/37
+Content-Type: application/x-www-form-urlencoded
+cache-control: no-cache
+Postman-Token: 5212f164-21dd-410a-b13a-776f2a343d05
+User-Agent: PostmanRuntime/7.6.1
+Accept: */*
+Host: localhost:3000
+accept-encoding: gzip, deflate
+content-length: 21
+password=passwordbaru
+                        </pre>
+                        <h6>HTTP Response (<span style="color:green">success</span>)</h6>
+                        <pre>
+HTTP/1.1 200
+status: 200
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Origin, X-Requested-With,Content-Type,Accept
+Content-Type: application/json; charset=utf-8
+Content-Length: 168
+ETag: W/"a8-A6aUB2OZrEICcuz3kHgDb+GNysg"
+Date: Fri, 29 Mar 2019 08:20:17 GMT
+Connection: keep-alive
+{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"(Rows matched: 1 Changed: 1 Warnings: 0","protocol41":true,"changedRows":1}
+                        </pre>                              
+            </div>
+          </div>
+          
+
+              <div class="tab-pane" id="pane-3">
+                	 <div class="content">
+                        <h1>User Profile Update</h1>
+                        <p>Updating a new profile for user to database</p>
+                        
+                        <h3>API End Point</h3>
+                        <a href="http://localhost:3000/api/user/">http://localhost:3000/api/user/:id</a>
+                        
+                        <h3>Request Type</h3>
+                        <p>PATCH Request</p>
+
+                        <h3>Request Body</h3>
+                        <p>
+                        	<blockquote>
+                        			email (type=email, unique,required),
+                        			<br>name (type=string,minlength=6),
+                        			<br>password (type=string,minlength=6,required),
+                        			<br>phone (type=numeric)
+                        	</blockquote>
+                        </p>
+                    
+                   
+                    <h3>Example</h3>
+                    <p>This API was tested using Postman</p>                    
+<!---Successful Registration-->
+                    <h4 style="color:green">Registration Success</h4>
+                    <h6>HTTP Request (body type=json)</h6>
+                        <pre>
+PATCH /api/user/37
+Content-Type: application/x-www-form-urlencoded
+cache-control: no-cache
+Postman-Token: 4e0470de-53fd-472a-89ba-79ebe283dc89
+User-Agent: PostmanRuntime/7.6.1
+Accept: */*
+Host: localhost:3000
+accept-encoding: gzip, deflate
+content-length: 71
+name=runtimeerror&email=runtime%40gmail.com&password=passwordupdatelagi
+                        </pre>
+                        <h6>HTTP Response (<span style="color:green">success</span>)</h6>
+                        <pre>
+HTTP/1.1 200
+status: 200
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Origin, X-Requested-With,Content-Type,Accept
+Content-Type: application/json; charset=utf-8
+Content-Length: 168
+ETag: W/"a8-W4CE5H7+CXFMUvzuMbDrFPJz4tY"
+Date: Fri, 29 Mar 2019 07:59:09 GMT
+Connection: keep-alive
+{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"(Rows matched: 1 Changed: 0 Warnings: 0","protocol41":true,"changedRows":0}
+                        </pre>                              
+            </div>
+        </div>
+
+        <div class="tab-pane" id="pane-4">
+                	 <div class="content">
+                        <h1>Get All User</h1>
+                        <p>Showing all User in Database</p>
+                        <h3>API End Point</h3>
+                        <a href="http://localhost:3000/api/user/all">http://localhost:3000/api/user/all</a>
+                        
+                        <h3>Request Type</h3>
+                        <p>GET Request</p>
+
+                         <h3>Example</h3>
+                    <p>This API was tested using Postman</p>                    
+<!---Successful Registration-->
+                    <h4 style="color:green">Registration Success</h4>
+                    <h6>HTTP Request (body type=json)</h6>
+                        <pre>
+GET /api/user/all
+Content-Type: application/x-www-form-urlencoded
+cache-control: no-cache
+Postman-Token: 8e3ae252-80e1-4120-9b0f-80205b97cd73
+User-Agent: PostmanRuntime/7.6.1
+Accept: */*
+Host: localhost:3000
+accept-encoding: gzip, deflate
+                        </pre>
+                        <h6>HTTP Response (<span style="color:green">success</span>)</h6>
+                        <pre>
+HTTP/1.1 200
+status: 200
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Origin, X-Requested-With,Content-Type,Accept
+Content-Type: application/json; charset=utf-8
+Content-Length: 211
+ETag: W/"d3-Ik3JyPIAiW3Pz4HITtUFBQLOE18"
+Date: Fri, 29 Mar 2019 08:34:26 GMT
+Connection: keep-alive
+[{"id":37,"email":"runtime@gmail.com","name":"runtimeerror","password":"passwordbaru","phone":"085215127854"},{"id":39,"email":"namaku@gmail.com","name":"namaku","password":"namaku4kali","phone":"089231251256"}]
+                        </pre>        
+              </div>
+          </div>
+
+          <div class="tab-pane" id="pane-5">
+                	 <div class="content">
+                        <h1>How to use</h1>
+                        <p>Here is the tutorial to use the API </p>
+                        <ol>
+                        	<li> Clone repo </li>
+<li> <code>npm install</code> to install all dependencies
+</li>
+<li> Setting database:
+		- Create database. Configure database settings on <code>src/db.js</code>
+		- Import db.sql in root folder to database
+</li>
+<li> <code>node server</code> in root folder to start server
+</li>
+                        </ol>
+                    </div>
+                </div>
+    </section>
+
+
+    <script>
+    	(function() {
+		    var burger = document.querySelector('.burger');
+		    var menu = document.querySelector('#'+burger.dataset.target);
+		    burger.addEventListener('click', function() {
+		        burger.classList.toggle('is-active');
+		        menu.classList.toggle('is-active');
+		    });
+		})();
+    </script>
+
+
+    <script>
+    	document.querySelectorAll("#nav li").forEach(function(navEl) {
+		  navEl.onclick = function() { toggleTab(this.id, this.dataset.target); }
+		});
+
+		function toggleTab(selectedNav, targetId) {
+		  var navEls = document.querySelectorAll("#nav li");
+
+		  navEls.forEach(function(navEl) {
+		    if (navEl.id == selectedNav) {
+		      navEl.classList.add("is-active");
+		    } else {
+		      if (navEl.classList.contains("is-active")) {
+		        navEl.classList.remove("is-active");
+		      }
+		    }
+		  });
+
+		  var tabs = document.querySelectorAll(".tab-pane");
+
+		  tabs.forEach(function(tab) {
+		    if (tab.id == targetId) {
+		      tab.style.display = "block";
+		    } else {
+		      tab.style.display = "none";
+		    }
+		  });
+		}
+    </script>
+
+
+    
+</body>
+</html>
