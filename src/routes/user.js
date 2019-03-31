@@ -12,4 +12,12 @@ userRouter.post('/',
 	],
 	userController.registerUser)
 
+//update user password
+userRouter.patch('/password/:id',
+	[
+		check('password').isLength({min:6})
+	],
+	userController.updateUserPassword)
+
+
 module.exports = userRouter
