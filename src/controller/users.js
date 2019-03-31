@@ -34,6 +34,24 @@ const userController = {
 		.catch((err)=>{
 			res.json(err)
 		})
+	},
+
+		updateUserProfile:(req,res)=>{
+		const errors = validationResult(req)
+		if(!errors.isEmpty()){
+			return res.status(422).json({errors:errors.array()})
+		}
+		
+		const userId = req.params.id
+		const updateObj = req.body
+		userDAO.updateProfile(userId,updateObj)
+		.then((result)=>{
+			res.json(result)
+		})
+		.catch((err)=>{
+			res.json(err)
+		})		
 	}
+
 }
 module.exports= userController

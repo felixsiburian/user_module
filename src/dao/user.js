@@ -10,6 +10,17 @@ const userDAO = {
 			})
 		})
 	},
+
+	findById:(id)=>{
+		const queryStr = "SELECT * from tb_user WHERE id=?"
+		return new Promise((resolve,reject)=>{
+			connection.query(queryStr,[id],(err,result)=>{
+				if(err)reject(err)
+				else resolve(result)
+			})
+		});
+	},
+	
 	updatePassword:(id,newPassword)=>{
 		const queryStr="UPDATE tb_user SET password=? WHERE id=?"
 		return new Promise((resolve,reject)=>{
