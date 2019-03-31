@@ -20,11 +20,27 @@ const userDAO = {
 			})
 		});
 	},
-	
+
 	updatePassword:(id,newPassword)=>{
 		const queryStr="UPDATE tb_user SET password=? WHERE id=?"
 		return new Promise((resolve,reject)=>{
 			connection.query(queryStr,[newPassword,id],(err,result)=>{
+				if(err)reject(err)
+				else resolve(result)
+			})
+		})
+	}
+
+	updateProfile:(id,toUpdateObj)=>{
+		
+		let update_set = Object.keys(toUpdateObj).map(value=>{
+       		return ` ${value}  = "${toUpdateObj[value]}"`;
+    	});
+		let queryStr = `UPDATE tb_user SET ${update_set.join(" ,")} WHERE id=?`
+		
+		console.log(queryStr)
+		return new Promise((resolve,reject)=>{
+			connection.query(queryStr,id,(err,result)=>{
 				if(err)reject(err)
 				else resolve(result)
 			})

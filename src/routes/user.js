@@ -20,4 +20,20 @@ userRouter.patch('/password/:id',
 	userController.updateUserPassword)
 
 
+//update user profile
+userRouter.patch('/:id',
+	[
+	
+	check('name').isLength({min:6}).optional(),
+		
+	check('email').isEmail().optional(),
+		
+	check('password').isLength({min:6}).optional(),
+
+	check('phone').isNumeric().optional()
+
+	],
+
+	userController.updateUserProfile)
+
 module.exports = userRouter
