@@ -5,7 +5,7 @@ REST API SERVER for user module
  - User Registration
  - Update User Profile
  - Update User Password
- - <b>(Bonus)</b> Get All REgistered User
+ - <b>(Bonus)</b> Get All Registered User
 
 ## Tech Stack
 name | desc 
