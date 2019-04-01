@@ -1,13 +1,11 @@
-# REST-API-user-profile-module
-This works for :
-1. Registration user
-2. Update user profile
-3. Update user password
-4. Show all user 
-
 # USER MODULE
-
 REST API SERVER for user module
+
+## Features
+ - User Registration
+ - Update User Profile
+ - Update User Password
+ - <b>(Bonus)</b> Get All REgistered User
 
 ## Tech Stack
 name | desc 
@@ -23,14 +21,13 @@ express-validator | request body validator
 
 
 ## Installation
-1. Clone repo
+1. Clone this repository
 2. <code>npm install</code> to install all dependencies
-3. Setting database:
-		- Create database. Configure database settings on <code>src/db.js</code>
-		- Import db.sql in root folder to database
-
-4. <code>node server</code> in root folder to start server
+3. Setting database:<br>
+	- Create database. Configure database settings on <code>src/db.js</code>
+	- To create table instantly. Import db.sql in root folder to created database
+4. <code>npm start </code> in root folder to start server
 
 
 ## API Documentation
-Visit localhost:3000/guide
+Please check API documentation at [API Guiodeline]: localhost:3000/
